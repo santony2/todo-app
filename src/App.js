@@ -2,9 +2,10 @@
 import React, { useState } from 'react';
 import './App.css';
 
-function App() {
+const App = () => {
   const [todoitems, setTodoitems] = useState([]);
   const [inputValue, setInputValue] = useState('');
+  const [newtodoitems, setnewTodoitems] = useState([]);
   
   function handleChange(e){
     setInputValue(e.target.value)
@@ -16,6 +17,17 @@ function App() {
     setInputValue('')
   }
 
+  const handleDelete = (index) => {
+   //setnewTodoitems ([...todoitems]); 
+   //setTodoitems(todoitems.splice(index,1)); 
+   setTodoitems(todoitems => todoitems.filter((item, i) => i !== index));
+   //newtodoitems.splice(index,1);
+   alert("index :",{index});
+   alert(todoitems);
+   //setTodoitems(newtodoitems);
+  }
+  
+ 
   return (
     <div className="App">
       <header className="App-header">
@@ -25,16 +37,18 @@ function App() {
         </p>
       </header>
       <body className="App-body">
-      <form><br />
-        {todoitems.map((todo) => (
-        <><input type="checkbox" id={todo} name={todo} value={todo}></input><label>{todo}&nbsp;</label>
-         <button>Edit</button>&nbsp;
-         <button>Delete</button><br/>
+      <form><br /><ul>
+        {todoitems.map((todo, index) => (
+        <>
+         <li>{todo}&nbsp;<button>Edit</button>&nbsp;
+         <button id={index} value={index} onClick={() =>handleDelete(index)}>Delete</button><br/></li>
         </>
         ))}
+        </ul>
         <br />
-        <input type="text" value={inputValue} onChange={handleChange}></input>
+        <input type="text" value={inputValue} onChange={handleChange}></input>&nbsp;
         <button onClick={handleSubmit}>Add To Do</button>
+        
         <br />
       </form>
       </body>
