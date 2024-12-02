@@ -43,4 +43,4 @@ You don't have to ever use `eject`. The curated feature set is suitable for smal
 
 ### Project work
 
-This repositorty was created as a part of my academic project to build a webapp in React that will be served by a web server hosted on Azure. It will connect to a database to pull the data and display on the UI. 
+This repository was created as a part of my academic project to build a webapp in React that will be served by a web server hosted on Azure. It will connect to a database to pull the data and display on the UI. 
