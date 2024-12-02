@@ -5,7 +5,6 @@ import './App.css';
 const App = () => {
   const [todoitems, setTodoitems] = useState([]);
   const [inputValue, setInputValue] = useState('');
-  const [newtodoitems, setnewTodoitems] = useState([]);
   
   function handleChange(e){
     setInputValue(e.target.value)
@@ -17,41 +16,43 @@ const App = () => {
     setInputValue('')
   }
 
-  const handleDelete = (index) => {
-   //setnewTodoitems ([...todoitems]); 
-   //setTodoitems(todoitems.splice(index,1)); 
-   setTodoitems(todoitems => todoitems.filter((item, i) => i !== index));
+  const handleDelete = (tIndex) => {
+    const newTodoitems = todoitems.filter((item, i) => i !== tIndex);
+    //const newTodoitems = todoitems
+    //newTodoitems(newTodoitems.splice(tIndex,1)); 
+   //setTodoitems(todoitems.filter((item, i) => i !== index));
    //newtodoitems.splice(index,1);
-   alert("index :",{index});
-   alert(todoitems);
-   //setTodoitems(newtodoitems);
-  }
+   //alert(tIndex);
+   alert(newTodoitems);
+   setTodoitems(newTodoitems);
+   //setInputValue('')
+  };
   
  
   return (
     <div className="App">
-      <header className="App-header">
-        <h1>To Do list</h1>
+       <h1>To Do list</h1>
         <p>
-          Here's a list of items for you to do
+          Here's a list of items for you to do<br />
         </p>
-      </header>
-      <body className="App-body">
-      <form><br /><ul>
-        {todoitems.map((todo, index) => (
-        <>
-         <li>{todo}&nbsp;<button>Edit</button>&nbsp;
-         <button id={index} value={index} onClick={() =>handleDelete(index)}>Delete</button><br/></li>
-        </>
-        ))}
+      <form>
+      <ul>
+        {todoitems.map((todo, index) => {
+          return (
+            <>
+              <li key={index} id={index}>{todo}&nbsp;<button>Edit</button>&nbsp;
+                <button key={index} id={index} type="button" onClick={() => handleDelete(index)}>Delete</button></li>
+            </>
+          );
+        })}
         </ul>
         <br />
-        <input type="text" value={inputValue} onChange={handleChange}></input>&nbsp;
-        <button onClick={handleSubmit}>Add To Do</button>
+        <label for="addItem">New items to add<br /></label> 
+        <input type="text" id="addItem" value={inputValue}onChange={handleChange}></input>&nbsp;
+        <button key="addItem" id="addItemb" type="button" onClick={handleSubmit}>Add To Do</button>
         
         <br />
       </form>
-      </body>
     </div>
   );
 }
